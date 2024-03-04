@@ -1,0 +1,24 @@
+@startuml
+
+left to right direction
+actor "Responsable TI" as resIT
+actor "Responsable Operaciones" as resOpe 
+
+usecase "Iniciar Sesión" as login
+usecase "Agregar Tóner" as agregarToner
+usecase "Consultar Tóner" as consultaToner
+usecase "Consultar Inventario"as consulInv
+
+resIT --> login
+resIT --> agregarToner
+resIT --> consultaToner
+resIT --> consulInv
+
+
+
+login <- resOpe
+consultaToner <--left-- resOpe
+
+@enduml
+
+

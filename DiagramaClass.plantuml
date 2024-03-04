@@ -1,0 +1,30 @@
+@startuml
+
+class Empleado {
+  String nombreEmpleado
+  String login
+  String password
+  String perfil
+}
+
+class Toner {
+   String  serial
+   String  marca
+   String referencia
+   String estado
+}
+
+class Empresa{
+    int nit
+    String nombreEmpresa
+}
+
+Empresa -o Toner
+Empleado -* Toner
+
+
+@enduml
+
+
+
+
