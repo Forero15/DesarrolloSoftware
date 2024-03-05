@@ -8,11 +8,13 @@ usecase "Iniciar Sesión" as login
 usecase "Agregar Tóner" as agregarToner
 usecase "Consultar Tóner" as consultaToner
 usecase "Consultar Inventario"as consulInv
+usecase "Agregar Empresa" as agregarEmpresa
 
 resIT --> login
 resIT --> agregarToner
 resIT --> consultaToner
 resIT --> consulInv
+resIT --> agregarEmpresa
 
 
 
