@@ -1,0 +1,31 @@
+@startuml
+
+actor Empleado as empleado
+boundary "FE Login" as feLogin
+
+empleado -> feLogin
+
+control "Ingresar Usuario" as ingresarUsuario
+control "Ingresar Contraseña" as ingresarContraseña
+control "BE Consultar Usuario y Contraseña" as beConsultarUsuarioContraseña
+
+feLogin -> ingresarUsuario
+feLogin --right--> ingresarContraseña
+feLogin -up-> beConsultarUsuarioContraseña
+
+entity Usuario as entityUsuario
+entityUsuario -> beConsultarUsuarioContraseña
+
+control "Clic en botón 'INGRESAR'" as botonIngresar
+feLogin -down-> botonIngresar
+
+control "Validar Usuario y Contraseña" as validarCredenciales
+botonIngresar -right-> validarCredenciales
+
+boundary "Mostrar error" as error
+validarCredenciales -> error: Mostrar error
+
+usecase (Consultar Inventario) as consultarInventario
+validarCredenciales -down-> consultarInventario
+
+@enduml
