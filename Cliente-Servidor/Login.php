@@ -12,7 +12,8 @@
             
         
 
-        <h1>Holi</h1>
+            <h1>Bienvenido <?php echo $login; ?> </h1>
+            
         <form action="">
             Login <input type="text" name="txtUser" value="<?php echo $login; ?>" />
             Contraseña: <input type="password" name="txtPass" value="<?php echo $login; ?>" /> <br/>
