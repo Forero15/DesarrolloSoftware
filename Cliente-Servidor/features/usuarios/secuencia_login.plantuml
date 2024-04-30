@@ -1,0 +1,29 @@
+@startuml
+actor "Empleado" as actorEmpleado
+boundary "<<Pantalla>>\nLogin" as boundryPantallaLogin
+
+actorEmpleado -> boundryPantallaLogin
+activate boundryPantallaLogin
+    boundryPantallaLogin -> boundryPantallaLogin: getLogin()
+    activate boundryPantallaLogin
+        control "LoginController" as LoginController
+            control "LoginModel" as LoginModel
+            boundryPantallaLogin -> LoginController: GET api/v1/usuarios: Usuarios[]
+            activate LoginController
+                LoginController -> LoginModel: getLoginMeraki()
+                activate LoginController
+                    database "bd_Meraki" as bd_Meraki
+                    entity login_users
+                    activate LoginModel
+                        activate LoginModel
+                            LoginModel -> bd_Meraki: SQL query
+                            bd_Meraki -> login_users
+                            bd_Meraki -> LoginModel: {id, user, password}
+                        deactivate
+
+                    deactivate
+                deactivate
+        deactivate
+    deactivate
+deactivate
+@enduml
