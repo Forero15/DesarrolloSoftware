@@ -13,17 +13,16 @@ activate boundryPantallaLogin
                 LoginController -> LoginModel: getLoginMeraki()
                 activate LoginController
                     database "bd_Meraki" as bd_Meraki
-                    entity login_users
+                    entity login
                     activate LoginModel
                         activate LoginModel
                             LoginModel -> bd_Meraki: SQL query
-                            bd_Meraki -> login_users
+                            bd_Meraki -> login
                             bd_Meraki -> LoginModel: {id, user, password}
                         deactivate
-
                     deactivate
                 deactivate
+            deactivate    
         deactivate
     deactivate
-deactivate
 @enduml

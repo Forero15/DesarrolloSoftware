@@ -1,0 +1,28 @@
+@startuml
+actor "Responsable TI" as actorEmpleado
+boundary "<<Pantalla>>\nLogin" as boundryPantallaAgregarToner
+
+actorEmpleado -> boundryPantallaAgregarToner
+activate boundryPantallaAgregarToner
+    boundryPantallaAgregarToner -> boundryPantallaAgregarToner: getLogin()
+    activate boundryPantallaAgregarToner
+        control "TonerController" as TonerController
+            control "TonerModel" as TonerModel
+            boundryPantallaAgregarToner -> TonerController: GET api/v1/toner: Toner[]
+            activate TonerController
+                TonerController -> TonerModel: getLoginMeraki()
+                activate TonerController
+                    database "bd_Meraki" as bd_Meraki
+                    entity toner
+                    activate TonerModel
+                        activate TonerModel
+                            TonerModel -> bd_Meraki: SQL query
+                            bd_Meraki -> toner
+                            bd_Meraki -> TonerModel: {id, user, password}
+                        deactivate
+                    deactivate
+                deactivate
+            deactivate    
+        deactivate
+    deactivate
+@enduml
