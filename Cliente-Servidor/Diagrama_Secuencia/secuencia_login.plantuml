@@ -1,5 +1,5 @@
 @startuml
-actor "Empleado" as actorEmpleado
+actor "Responsable TI" as actorEmpleado
 boundary "<<Pantalla>>\nLogin" as boundryPantallaLogin
 
 actorEmpleado -> boundryPantallaLogin
