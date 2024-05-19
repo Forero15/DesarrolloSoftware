@@ -8,11 +8,12 @@ export default class LoginModelPrisma {
     this.#prismaClient = new PrismaClient();
   }
 
-  async addUser(user){
-    const respuesta = await this.#prismaClient.user.create({data: user});
+  async addUser(Login){
+    const respuesta = await this.#prismaClient.Login.create({data:Login});
+    
   }
 
   async getLoginMeraki() {
-    return await this.#prismaClient.user.findMany();
+    return await this.#prismaClient.Login.findMany();
   }
 }

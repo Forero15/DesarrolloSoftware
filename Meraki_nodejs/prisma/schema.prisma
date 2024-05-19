@@ -14,10 +14,24 @@ datasource mysql {
   url      = env("MYSQL_DATABASE_URL")
 }
 
-
 model Login {
   id    Int    @id @default(autoincrement())
   user String
   password String
+  // Add other fields as needed
+}
+
+model Toner {
+  id Int @id @default(autoincrement())
+  marca    String    
+  referencia String
+  serial Int
+  // Add other fields as needed
+}
+
+model Empresa {
+  id Int @id @default(autoincrement())
+  nombre_Empresa    String    
+  nit Int
   // Add other fields as needed
 }

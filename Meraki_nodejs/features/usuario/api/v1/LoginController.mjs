@@ -1,5 +1,5 @@
 import express from "express";
-import LoginModelPrisma from "../../login-model.prima.mjs";
+import LoginModelPrisma from "../../login-model.prisma.mjs";
 
 const { Router } = express;
 
@@ -18,8 +18,8 @@ export default class LoginController {
   
   registerRoutes() {
     const routerV1 = Router();
-    routerV1.get(`/usuarios`, async (req, res) => await this.getLoginMeraki(req, res));
-    routerV1.post(`/usuarios`, async (req, res) => await this.createLogin(req, res));
+    routerV1.get(`/usuario`, async (req, res) => await this.getLoginMeraki(req, res));
+    routerV1.post(`/usuario`, async (req, res) => await this.createLogin(req, res));
     
     this.#router.use(`/v1`, routerV1);
   }
@@ -38,7 +38,7 @@ export default class LoginController {
       const user = req.body;
       console.info({user});
       this.#loginModel.addUser(user);
-      res.send('Usuario creada');
+      res.send('Usuario creado');
     } catch (error) {
       console.error(`error: ${error}`);
     }

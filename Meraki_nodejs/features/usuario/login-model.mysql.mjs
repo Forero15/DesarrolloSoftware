@@ -19,7 +19,7 @@ export default class LoginModel {
   }
 
   async getLoginMeraki(user, password) {
-    const query = 'SELECT id, user, password  FROM login_users';
+    const query = 'SELECT id, user, password  FROM Login';
     try {
       const results = await new Promise((resolve, reject) => {
         this.connection.query(query, (error, results) => {
