@@ -1,24 +1,23 @@
 @startuml
-actor "Empleado" as actorEmpleado
-boundary "<<Pantalla>>\nLogin" as boundryPantallaLogin
-
-actorEmpleado -> boundryPantallaLogin
-activate boundryPantallaLogin
-    boundryPantallaLogin -> boundryPantallaLogin: getLogin()
-    activate boundryPantallaLogin
-        control "LoginController" as LoginController
-            control "LoginModel" as LoginModel
-            boundryPantallaLogin -> LoginController: GET api/v1/usuarios: Usuarios[]
-            activate LoginController
-                LoginController -> LoginModel: getLoginMeraki()
-                activate LoginController
+actor "ResponsableTI" as actorEmpleado
+boundary "<<Pantalla>>\nPantallaAgregarEmpresa" as boundryPantallaAgregarEmpresa
+actorEmpleado -> boundryPantallaAgregarEmpresa
+activate boundryPantallaAgregarEmpresa
+    boundryPantallaAgregarEmpresa -> boundryPantallaAgregarEmpresa: get()
+    activate boundryPantallaAgregarEmpresa
+        control "EmpresaController" as EmpresaController
+            control "EmpresaModel" as EmpresaModel
+            boundryPantallaAgregarEmpresa -> EmpresaController: GET api/v1/empresa: Empresa[]
+            activate EmpresaController
+                EmpresaController -> EmpresaModel: getEmpresaMeraki()
+                activate EmpresaController
                     database "bd_Meraki" as bd_Meraki
-                    entity login
-                    activate LoginModel
-                        activate LoginModel
-                            LoginModel -> bd_Meraki: SQL query
-                            bd_Meraki -> login
-                            bd_Meraki -> LoginModel: {id, user, password}
+                    entity Empresa
+                    activate EmpresaModel
+                        activate EmpresaModel
+                            EmpresaModel -> bd_Meraki: SQL query
+                            bd_Meraki -> Empresa
+                            bd_Meraki -> EmpresaModel: {id, nombre_Empresa, nit}
                         deactivate
                     deactivate
                 deactivate
