@@ -1,0 +1,27 @@
+@startuml
+actor "ResponsableTI" as actorEmpleado
+boundary "<<Pantalla>>\nPantallaAgregarEmpresa" as boundryPantallaAgregarEmpresa
+actorEmpleado -> boundryPantallaAgregarEmpresa
+activate boundryPantallaAgregarEmpresa
+    boundryPantallaAgregarEmpresa -> boundryPantallaAgregarEmpresa: get()
+    activate boundryPantallaAgregarEmpresa
+        control "EmpresaController" as EmpresaController
+            control "EmpresaModel" as EmpresaModel
+            boundryPantallaAgregarEmpresa -> EmpresaController: GET api/v1/empresa: Empresa[]
+            activate EmpresaController
+                EmpresaController -> EmpresaModel: getEmpresaMeraki()
+                activate EmpresaController
+                    database "bd_Meraki" as bd_Meraki
+                    entity Empresa
+                    activate EmpresaModel
+                        activate EmpresaModel
+                            EmpresaModel -> bd_Meraki: SQL query
+                            bd_Meraki -> Empresa
+                            bd_Meraki -> EmpresaModel: {id, nombre_Empresa, nit}
+                        deactivate
+                    deactivate
+                deactivate
+            deactivate    
+        deactivate
+    deactivate
+@enduml

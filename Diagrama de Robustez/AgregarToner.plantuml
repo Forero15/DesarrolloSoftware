@@ -1,0 +1,37 @@
+@startuml
+
+actor ResponsableTI as responTI
+boundary "FE Agregar Tóner" as feAgregarToner
+
+responTI -> feAgregarToner
+
+control "Ingresar Marca" as ingresarMarca
+control "Ingresar Referencia" as ingresarReferencia
+control "Ingresar Serial" as ingresarSerial
+control "BE Consultar Toner" as beConsultarToner
+
+feAgregarToner ->ingresarMarca
+feAgregarToner ->ingresarReferencia
+feAgregarToner -> ingresarSerial
+feAgregarToner -up-> beConsultarToner
+
+entity Toner as entityToner
+entityToner -> beConsultarToner
+
+control "Clic en botón 'AGREGAR'" as botonAgregar
+feAgregarToner -down-> botonAgregar
+
+control "Validar Serial Tóner" as validarSerialToner
+botonAgregar -right-> validarSerialToner
+
+boundary "Mostrar error" as error
+validarSerialToner -> error: Mostrar error
+
+usecase (Consultar Inventario) as consultarInventario
+
+
+control "Guardar datos nuevo Tóner" as guardarDatosNuevoToner
+validarSerialToner -down-> guardarDatosNuevoToner
+guardarDatosNuevoToner -left-> entityToner
+guardarDatosNuevoToner -down-> consultarInventario
+@enduml

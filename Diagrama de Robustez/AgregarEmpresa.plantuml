@@ -1,0 +1,37 @@
+@startuml
+
+actor ResponsableTI as responTI
+boundary "FE Agregar Empresa" as feAgregarEmpresa
+
+responTI -> feAgregarEmpresa
+
+control "Ingresar Nombre Empresa" as ingresarNombreEmpresa
+control "Ingresar Nit" as ingresarNit
+control "BE Consultar Empresa" as beConsultarEmpresa
+
+feAgregarEmpresa ->ingresarNombreEmpresa
+feAgregarEmpresa ->ingresarNit
+feAgregarEmpresa -up-> beConsultarEmpresa
+
+entity Cliente as entityCliente
+entityCliente -> beConsultarEmpresa
+
+control "Clic en botón 'AGREGAR'" as botonAgregar
+feAgregarEmpresa -down-> botonAgregar
+
+control "Validar Nit Empresa" as validarNitEmpresa
+botonAgregar -right-> validarNitEmpresa
+
+boundary "Mostrar error" as error
+validarNitEmpresa -> error: Mostrar error
+
+usecase (Consultar Inventario) as consultarInventario
+
+
+control "Guardar datos nueva Empresa" as guardarDatosNuevaEmpresa
+validarNitEmpresa -down-> guardarDatosNuevaEmpresa
+guardarDatosNuevaEmpresa -left-> entityCliente
+guardarDatosNuevaEmpresa -down-> consultarInventario
+
+
+@enduml
